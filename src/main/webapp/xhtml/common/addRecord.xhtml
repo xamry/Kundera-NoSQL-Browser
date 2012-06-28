@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+<rich:panel>
+		<f:facet name="header">
+			<h:outputText value="Insert Record into #{homeBean.tableName}" />
+		</f:facet>
+		
+		<h:form>
+			<rich:panel rendered="#{homeBean.tableName == 'BOOK'}">
+					<table width="100%">
+						<tr>
+							<td><h:outputText value="ISBN:" />
+							</td>
+							<td><h:inputText value="#{homeBean.bookIsbn}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Author:" />
+							</td>
+							<td><h:inputText value="#{homeBean.bookAuthor}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Publication:" />
+							</td>
+							<td><h:inputText value="#{homeBean.bookPublication}" />
+							</td>
+						</tr>
+					</table>
+
+				</rich:panel>
+				<rich:panel rendered="#{homeBean.tableName == 'SONG'}">
+
+					<table width="100%">
+						<tr>
+							<td><h:outputText value="ID:" />
+							</td>
+							<td><h:inputText value="#{homeBean.songId}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="TITLE:" />
+							</td>
+							<td><h:inputText value="#{homeBean.songTitle}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="ARTIST:" />
+							</td>
+							<td><h:inputText value="#{homeBean.songArtist}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="ALBUM:" />
+							</td>
+							<td><h:inputText value="#{homeBean.songAlbum}" />
+							</td>
+						</tr>
+					</table>					
+				</rich:panel>
+				<h:commandButton value="  Insert  "	action="#{homeBean.insertRecord}" />
+					
+		</h:form>		
+	</rich:panel>	
+	
+</ui:composition>
