@@ -15,10 +15,6 @@
  */
 package com.impetus.kundera.browser.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,22 +22,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author amresh.singh
  */
 
-@Entity
-@Table(name="SONG", schema="KunderaExamples@twissandra")
 @XmlRootElement
 public class Song
 {
-    @Id
-    @Column(name="ID")
-    private int id;
-    
-    @Column(name="TITLE")
-    private String title;
-    
-    @Column(name="ARTIST")
-    private String artist;
-    
-    @Column(name="ALBUM")
+    private int id;    
+    private String title;    
+    private String artist;    
     private String album;
 
     /**

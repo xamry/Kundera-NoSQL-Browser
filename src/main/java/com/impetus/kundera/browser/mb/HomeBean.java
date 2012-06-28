@@ -18,6 +18,8 @@ package com.impetus.kundera.browser.mb;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,6 +40,8 @@ import com.sun.jersey.api.client.WebResource;
  * @author amresh.singh
  */
 
+@ManagedBean
+@RequestScoped
 public class HomeBean
 {      
     List<Record> records;

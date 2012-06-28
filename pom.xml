@@ -66,7 +66,16 @@
 			<artifactId>jersey-client</artifactId>
 			<version>1.12</version>
 		</dependency>
+		
+		<!-- Kundera and JPA  Libraries - SHOULDN'T BE HERE'-->		
+		<dependency>
+			<groupId>com.impetus.kundera.rest</groupId>
+			<artifactId>kundera-rest</artifactId>
+			<version>2.0.7-SNAPSHOT</version>
+		</dependency>			
 	</dependencies>
+	
+	
 
 	<build>
 		<finalName>KunderaNoSQLBrowser</finalName>

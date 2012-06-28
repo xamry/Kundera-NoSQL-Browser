@@ -16,6 +16,8 @@
 package com.impetus.kundera.browser.mb;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -34,6 +36,9 @@ import com.sun.jersey.api.client.WebResource;
  * 
  * @author amresh.singh
  */
+
+@ManagedBean
+@RequestScoped
 public class LoginBean
 {
     private String webServiceURL;
