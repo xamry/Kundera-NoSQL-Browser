@@ -8,6 +8,7 @@ Kundera-NoSQL-Browser.war -> TOAD like Kundera NoSQL browser tool web applicatio
 
 * Start Cassandra and run below commands on cassandra-cli:
 
+> "
 impadmin@impetus-ubuntu:/usr/local/apache-cassandra-1.0.6/bin$ ./cassandra-cli -h localhost -p 9160
 
 create keyspace KunderaExamples;
@@ -36,6 +37,7 @@ SET SONG['3']['ALBUM']='The devision bell';
 SET SONG['4']['TITLE']='Angel';
 SET SONG['4']['ARTIST']='Judas Priest';
 SET SONG['4']['ALBUM']='Angel of Retribution';
+"
 
 * Hit below URL:
 http://localhost:8080/KunderaNoSQLBrowser/xhtml/login/login.jsf
