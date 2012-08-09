@@ -1,12 +1,12 @@
 Deployment Steps:
 ==================================
 
-1. Copy below war files to tomcat webapps directory:
+* Copy below war files to tomcat webapps directory:
 
 Kundera-Web-Examples.war  -> Sample Kundera Powered web application
 Kundera-NoSQL-Browser.war -> TOAD like Kundera NoSQL browser tool web application
 
-2. Start Cassandra and run below commands on cassandra-cli:
+* Start Cassandra and run below commands on cassandra-cli:
 
 impadmin@impetus-ubuntu:/usr/local/apache-cassandra-1.0.6/bin$ ./cassandra-cli -h localhost -p 9160
 
@@ -37,10 +37,10 @@ SET SONG['4']['TITLE']='Angel';
 SET SONG['4']['ARTIST']='Judas Priest';
 SET SONG['4']['ALBUM']='Angel of Retribution';
 
-3. Hit below URL:
+* Hit below URL:
 http://localhost:8080/KunderaNoSQLBrowser/xhtml/login/login.jsf
 
-4. Provide URL of Kundera Powered web application:
+* Provide URL of Kundera Powered web application:
 URL: http://localhost:8080/Kundera-Web-Examples
 Persistence Unit: twissandra
 Media Type: XML
