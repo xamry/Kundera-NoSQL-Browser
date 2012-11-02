@@ -39,6 +39,7 @@ public class Utilities
 {
     
     public static Map<String, Class<?>> clazzMap = new HashMap<String, Class<?>>();
+    public static Map<String, String> tableClazzMap = new HashMap<String, String>();
     
     public static WebResource getWebResource(String url) {
         ClientConfig config = new DefaultClientConfig();
@@ -82,13 +83,6 @@ public class Utilities
     }
     
     
-    public static void main(String[] args)
-    {
-        String s = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><books><book><author>Vivek</author><isbn>2222222222222</isbn><publication>McGraw</publication></book><book><author>Amresh</author><isbn>1111111111111</isbn><publication>Willey</publication></book><books>";
-        
-        System.out.println(getClassName(s));
-        System.out.println(s);
-    }
     public static String getClassName(String listString) {
         String input = new String(listString);
         
@@ -101,6 +95,15 @@ public class Utilities
         String className = input.substring(1, input.indexOf(">"));
         className = className.substring(0, 1).toUpperCase() + className.substring(1, className.length());
         return className;        
+    }
+    
+    public static String getClassNameFromNativeQuery(String nativeQuery) {
+        for(String tableName : tableClazzMap.keySet()) {
+            if(nativeQuery.indexOf(tableName) > 0) {
+                return tableClazzMap.get(tableName);
+            }
+        }
+        return null;
     }
 
 }

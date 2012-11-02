@@ -34,6 +34,9 @@ public class StartupListener implements ServletContextListener
     {
          Utilities.clazzMap.put(Book.class.getSimpleName(), Book.class);
          Utilities.clazzMap.put(Song.class.getSimpleName(), Song.class);
+         
+         Utilities.tableClazzMap.put("BOOK", "Book");
+         Utilities.tableClazzMap.put("SONG", "Song");
 
     }
 

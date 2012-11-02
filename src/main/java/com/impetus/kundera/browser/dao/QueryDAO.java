@@ -83,7 +83,7 @@ public class QueryDAO
         HttpSession mySession = myRequest.getSession(); 
         
         WebResource webResource = (WebResource) mySession.getAttribute(Constants.WEB_RESOURCE);
-        WebResource.Builder queryBuilder = webResource.path("rest").path("kundera/api/query/" + entityClassName + "/all").accept(MediaType.APPLICATION_XML)
+        WebResource.Builder queryBuilder = webResource.path("rest").path("kundera/api/query/jpa/" + entityClassName + "/all").accept(MediaType.APPLICATION_XML)
         .header(com.impetus.kundera.rest.common.Constants.SESSION_TOKEN_HEADER_NAME, sessionToken);
         ClientResponse queryResponse = (ClientResponse) queryBuilder.get(ClientResponse.class);
         InputStream is = queryResponse.getEntityInputStream();
@@ -99,21 +99,27 @@ public class QueryDAO
         return records;
     }
     
-    public List<Record> getRecordsForQuery(String sessionToken, String jpaQuery) {
+    public List<Record> getRecordsForQuery(String sessionToken, String entityClassName, String query, String queryType) {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest myRequest = (HttpServletRequest)context.getExternalContext().getRequest();
-        HttpSession mySession = myRequest.getSession(); 
+        HttpSession mySession = myRequest.getSession();
+        List<Record> records = new ArrayList<Record>();
         
         WebResource webResource = (WebResource) mySession.getAttribute(Constants.WEB_RESOURCE);
+        WebResource.Builder queryBuilder = null;
         
-        
-        WebResource.Builder queryBuilder = webResource.path("rest").path("kundera/api/query/" + jpaQuery).accept(MediaType.APPLICATION_XML)
-        .header(com.impetus.kundera.rest.common.Constants.SESSION_TOKEN_HEADER_NAME, sessionToken);
+        if(Constants.QUERY_TYPE_JPA.equals(queryType)) {
+            queryBuilder = webResource.path("rest").path("kundera/api/query/jpa/query=" + query).accept(MediaType.APPLICATION_XML)
+            .header(com.impetus.kundera.rest.common.Constants.SESSION_TOKEN_HEADER_NAME, sessionToken);
+        } else if(Constants.QUERY_TYPE_NATIVE.equals(queryType)){
+            queryBuilder = webResource.path("rest").path("kundera/api/query/native/" + entityClassName + "/query=" + query).accept(MediaType.APPLICATION_XML)
+            .header(com.impetus.kundera.rest.common.Constants.SESSION_TOKEN_HEADER_NAME, sessionToken);
+        } else {
+            return records;
+        }       
         
         ClientResponse queryResponse = (ClientResponse) queryBuilder.get(ClientResponse.class);
         
-        
-        List<Record> records = new ArrayList<Record>();
         if(queryResponse.getStatus() == 200) {
             InputStream is = queryResponse.getEntityInputStream();           
             String allRecordsStr = StreamUtils.toString(is);          

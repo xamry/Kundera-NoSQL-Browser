@@ -29,5 +29,8 @@ public class Constants
     
     public static final String OUTCOME_LOGIN_FAILED = "loginFailed";
     public static final String OUTCOME_LOGIN_SUCCESSFUL = "loginSuccessful";
+    
+    public static final String QUERY_TYPE_JPA = "jpa";
+    public static final String QUERY_TYPE_NATIVE = "native";
 
 }

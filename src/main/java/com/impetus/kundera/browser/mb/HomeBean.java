@@ -29,6 +29,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.impetus.kundera.browser.common.Constants;
 import com.impetus.kundera.browser.common.Record;
+import com.impetus.kundera.browser.common.Utilities;
 import com.impetus.kundera.browser.dao.QueryDAO;
 import com.impetus.kundera.browser.dao.SessionDAO;
 import com.sun.jersey.api.client.ClientResponse;
@@ -52,7 +53,7 @@ public class HomeBean
     
     String entityClassName;
     
-    String jpaQuery;
+    String query;
     
     String primaryKey;
     
@@ -102,16 +103,29 @@ public class HomeBean
     
     public String runJPAQuery() {    
         
-        String jpaQuery = getJpaQuery();
+        String jpaQuery = getQuery();
         
         String sessionToken = new SessionDAO().getSessionToken();
         
-        getRecords().addAll(new QueryDAO().getRecordsForQuery(sessionToken, jpaQuery));
+        getRecords().addAll(new QueryDAO().getRecordsForQuery(sessionToken, getEntityClassName(), jpaQuery, Constants.QUERY_TYPE_JPA));
             
         new SessionDAO().closeSession(sessionToken);
         
         return "showTableDetails";
     }
+    
+    public String runNativeQuery() {
+        String nativeQuery = getQuery();
+        
+        String sessionToken = new SessionDAO().getSessionToken();
+        
+        getRecords().addAll(new QueryDAO().getRecordsForQuery(sessionToken, Utilities.getClassNameFromNativeQuery(nativeQuery), nativeQuery, Constants.QUERY_TYPE_NATIVE));
+            
+        new SessionDAO().closeSession(sessionToken);
+        
+        return "showTableDetails";
+    }
+    
     
     public String findById() {        
         
@@ -210,24 +224,24 @@ public class HomeBean
     public void setRecords(List<Record> records)
     {
         this.records = records;
-    }
-
-    /**
-     * @return the jpaQuery
-     */
-    public String getJpaQuery()
-    {
-        return jpaQuery;
-    }
-
-    /**
-     * @param jpaQuery the jpaQuery to set
-     */
-    public void setJpaQuery(String jpaQuery)
-    {
-        this.jpaQuery = jpaQuery;
-    }
+    }  
     
+    /**
+     * @return the query
+     */
+    public String getQuery()
+    {
+        return query;
+    }
+
+    /**
+     * @param query the query to set
+     */
+    public void setQuery(String query)
+    {
+        this.query = query;
+    }
+
     /**
      * @return the primaryKey
      */
