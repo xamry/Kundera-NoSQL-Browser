@@ -9,11 +9,19 @@ Kundera-NoSQL-Browser.war -> TOAD like Kundera NoSQL browser tool web applicatio
 
 impadmin@impetus-ubuntu:/usr/local/apache-cassandra-1.0.6/bin$ ./cassandra-cli -h localhost -p 9160
 
+drop keyspace KunderaExamples;
 create keyspace KunderaExamples;
 use KunderaExamples;
 drop column family BOOK;
-create column family BOOK with comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type;
-create column family SONG with comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type;
+create column family BOOK with comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type 
+and column_metadata=[
+    {column_name: AUTHOR, validation_class:UTF8Type, index_type: KEYS},
+    {column_name: PUBLICATION, validation_class:UTF8Type, index_type: KEYS}];
+create column family SONG with comparator=UTF8Type and default_validation_class=UTF8Type and key_validation_class=UTF8Type 
+and column_metadata=[
+    {column_name: TITLE, validation_class:UTF8Type, index_type: KEYS},
+    {column_name: ARTIST, validation_class:UTF8Type, index_type: KEYS},
+    {column_name: ALBUM, validation_class:UTF8Type, index_type: KEYS}];
 describe KunderaExamples;
 
 SET BOOK['1111111111111']['AUTHOR']='Amresh';
